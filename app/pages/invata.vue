@@ -11,23 +11,37 @@
           class="rounded-full"
         />
         <div>
-          <h1 class="text-3xl font-semibold text-slate-800 dark:text-slate-100">Prevenție și Învățare</h1>
-          <p class="text-slate-500">Înțelege ce ți se întâmplă și construiește-ți uneltele pentru calm.</p>
+          <h1 class="text-3xl font-semibold text-slate-800 dark:text-slate-100">
+            Prevenție și Învățare
+          </h1>
+          <p class="text-slate-500">
+            Înțelege ce ți se întâmplă și construiește-ți uneltele pentru calm.
+          </p>
         </div>
       </div>
 
       <!-- Grid de carduri (Don Norman: Conceptual Models) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <UCard v-for="(lesson, index) in lessons" :key="index" class="hover:shadow-lg transition-shadow cursor-pointer border-t-4" :style="`border-top-color: ${lesson.color}`">
+        <UCard
+          v-for="(lesson, index) in lessons"
+          :key="index"
+          class="hover:shadow-lg transition-shadow cursor-pointer border-t-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          :style="`border-top-color: ${lesson.color}`"
+          @click="navigateTo(lesson.path)"
+        >
           <template #header>
             <div class="flex items-center gap-3">
               <div :class="`p-2 rounded-lg bg-${lesson.colorBase}-100 dark:bg-${lesson.colorBase}-900/30 text-${lesson.colorBase}-600 dark:text-${lesson.colorBase}-400`">
-                <UIcon :name="lesson.icon" class="w-6 h-6" />
+                <UIcon
+                  :name="lesson.icon"
+                  class="w-6 h-6"
+                />
               </div>
-              <h3 class="text-xl font-medium text-slate-800 dark:text-slate-100">{{ lesson.title }}</h3>
+              <h3 class="text-xl font-medium text-slate-800 dark:text-slate-100">
+                {{ lesson.title }}
+              </h3>
             </div>
           </template>
-          
           <p class="text-slate-600 dark:text-slate-400">
             {{ lesson.description }}
           </p>
@@ -35,21 +49,13 @@
           <template #footer>
             <div class="flex justify-end">
               <UButton
-                v-if="lesson.to"
-                :to="lesson.to"
                 variant="ghost"
                 :color="lesson.buttonColor as any"
                 trailing-icon="i-lucide-arrow-right"
+                :to="lesson.path"
+                @click.stop
               >
                 Începe lecția
-              </UButton>
-              <UButton
-                v-else
-                variant="ghost"
-                color="neutral"
-                trailing-icon="i-lucide-clock"
-              >
-                În curând...
               </UButton>
             </div>
           </template>
@@ -67,8 +73,8 @@ const lessons = [
     icon: 'i-lucide-brain-circuit',
     color: '#3b82f6', // blue-500
     colorBase: 'blue',
-    buttonColor: 'primary',
-    to: '/mecanismul-panicii'
+    buttonColor: 'blue',
+    path: '/mecanismul-panicii'
   },
   {
     title: 'Exercițiul 5-4-3-2-1',
@@ -76,8 +82,8 @@ const lessons = [
     icon: 'i-lucide-eye',
     color: '#10b981', // emerald-500
     colorBase: 'emerald',
-    buttonColor: 'primary',
-    to: '/exercitiul-54321'
+    buttonColor: 'emerald',
+    path: '/exercitiul-54321'
   },
   {
     title: 'Respirația în 4 Timpi',
@@ -85,16 +91,17 @@ const lessons = [
     icon: 'i-lucide-wind',
     color: '#06b6d4', // cyan-500
     colorBase: 'cyan',
-    buttonColor: 'primary',
-    to: '/respiratia-in-4-timpi'
+    buttonColor: 'cyan',
+    path: '/respiratia-in-4-timpi'
   },
   {
-    title: 'Setări și Ancore',
-    description: 'Cum să-ți pregătești dimineața și să-ți creezi "ancore" mentale pentru momentele de stres.',
-    icon: 'i-lucide-anchor',
-    color: '#8b5cf6', // violet-500
-    colorBase: 'violet',
-    buttonColor: 'violet'
+    title: 'Dialoguri de Schimbare',
+    description: 'Învață să-ți provoci gândurile catastrofice prin metoda socratică și dovezi factuale.',
+    icon: 'i-lucide-message-square-quote', // Un icon care sugerează dialog și analiză
+    color: '#3b82f6', // blue-500: Albastrul inspiră încredere, calm și logică (ideal pentru CBT)
+    colorBase: 'blue',
+    buttonColor: 'blue',
+    path: '/dialoguri-de-schimbare'
   }
 ]
 </script>
