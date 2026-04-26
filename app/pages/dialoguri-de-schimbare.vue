@@ -95,6 +95,7 @@
               <Transition name="fade-slide">
                 <div
                   v-if="feedback && feedback.selectedIdx === idx && feedback.type === 'error'"
+                  :id="'feedback-' + idx"
                   class="p-5 rounded-2xl bg-red-950/40 border border-red-900 text-red-200"
                 >
                   <div class="flex items-start gap-3">
@@ -114,6 +115,7 @@
                 </div>
                 <div
                   v-else-if="feedback && feedback.selectedIdx === idx && feedback.type === 'success'"
+                  :id="'feedback-' + idx"
                   class="p-5 rounded-2xl bg-green-950/40 border border-green-900 text-green-200"
                 >
                   <div class="flex items-center gap-3">
@@ -136,7 +138,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 
 const selectedFear = ref(null)
 const currentQuestionIndex = ref(0)
@@ -148,7 +150,7 @@ const startQuiz = (fear) => {
   feedback.value = null
 }
 
-const handleAnswer = (option, idx) => {
+const handleAnswer = async (option, idx) => {
   // Previne click-urile adiționale în timp ce se afișează feedback-ul de succes
   if (feedback.value?.type === 'success') return
 
@@ -167,6 +169,14 @@ const handleAnswer = (option, idx) => {
       }
     }, 1800)
   }
+
+  await nextTick()
+  setTimeout(() => {
+    const el = document.getElementById(`feedback-${idx}`)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, 50)
 }
 
 const dialogData = [
