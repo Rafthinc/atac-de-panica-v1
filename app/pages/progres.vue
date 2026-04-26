@@ -28,7 +28,7 @@
             Durată
           </p>
           <p class="text-2xl font-semibold text-emerald-600 dark:text-emerald-400">
-            ~4 min
+            {{ sessionDuration }}
           </p>
         </div>
         <div class="text-center">
@@ -113,6 +113,9 @@
 // Într-o aplicație reală, timpul s-ar calcula pe baza momentului în care s-a intrat în SOS.
 import JSConfetti from 'js-confetti'
 import { onMounted } from 'vue'
+
+// Preluăm starea globală calculată în pagina anterioară (dacă nu există, se afișează valoarea default)
+const sessionDuration = useState<string>('sessionDuration', () => '~4 min')
 
 onMounted(() => {
   try {

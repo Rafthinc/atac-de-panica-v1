@@ -24,7 +24,9 @@
             name="i-lucide-heart-handshake"
             class="w-16 h-16"
           />
-          <span class="text-2xl font-bold uppercase tracking-wider">Ajută-mă<br>Acum</span>
+          <div class="text-center">
+            <span class="text-2xl font-bold uppercase tracking-wider">Ajută-mă<br>Acum</span>
+          </div>
         </div>
       </UButton>
 

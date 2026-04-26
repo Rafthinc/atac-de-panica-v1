@@ -96,11 +96,17 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
+// Stocăm timpul la care s-a intrat pe pagină și o stare globală pentru progres
+const sessionDuration = useState<string>('sessionDuration', () => '~4 min')
+let startTime = 0
+
 // Respirație
 const isBreathingIn = ref(true)
 let breathInterval: ReturnType<typeof setInterval>
 
 onMounted(() => {
+  startTime = Date.now()
+
   // Ciclu de 4 secunde inspir, 4 secunde expir
   breathInterval = setInterval(() => {
     isBreathingIn.value = !isBreathingIn.value
@@ -108,6 +114,14 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  if (startTime > 0) {
+    const elapsedMs = Date.now() - startTime
+    const minutes = Math.floor(elapsedMs / 60000)
+    const seconds = Math.floor((elapsedMs % 60000) / 1000)
+
+    sessionDuration.value = minutes > 0 ? `${minutes} min ${seconds} sec` : `${seconds} sec`
+  }
+
   if (breathInterval) clearInterval(breathInterval)
 })
 
