@@ -6,10 +6,6 @@ export default defineNuxtConfig({
     '@nuxtjs/plausible'
   ],
 
-  plausible: {
-    ignoredHostnames: ['localhost']
-  },
-
   devtools: {
     enabled: true
   },
@@ -29,5 +25,10 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
+  },
+
+  plausible: {
+    domain: 'atac-de-panica-v1-fdun.vercel.app',
+    ignoredHostnames: ['localhost']
   }
 })
