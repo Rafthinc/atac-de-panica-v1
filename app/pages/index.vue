@@ -32,12 +32,14 @@
       <div class="pt-8">
         <UButton
           to="/invata"
-          variant="ghost"
-          color="neutral"
-          class="text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
+          variant="soft"
+          color="gray"
+          size="lg"
+          trailing-icon="i-lucide-arrow-right"
+          class="rounded-full px-6 py-2 shadow-sm hover:shadow transition-all hover:-translate-y-0.5 text-slate-600 dark:text-slate-300 font-medium"
           @click="trackEvent('learn_button_click')"
         >
-          Vreau să învăț (Prevenție)
+          Poți preveni. Învață cum!
         </UButton>
       </div>
     </div>
