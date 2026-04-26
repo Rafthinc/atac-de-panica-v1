@@ -2,8 +2,13 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@nuxtjs/plausible'
   ],
+
+  plausible: {
+    ignoredHostnames: ['localhost']
+  },
 
   devtools: {
     enabled: true
