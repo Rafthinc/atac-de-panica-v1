@@ -41,27 +41,39 @@
         </h3>
 
         <div class="grid grid-cols-1 gap-3">
-          <UButton
+          <div
             v-for="symptom in symptoms"
             :key="symptom.id"
-            color="neutral"
-            variant="solid"
-            size="lg"
-            class="w-full justify-start text-left shadow-sm py-3 text-slate-600 dark:text-slate-500"
-            @click="selectSymptom(symptom)"
+            class="flex flex-col"
           >
-            {{ symptom.label }}
-          </UButton>
-        </div>
+            <UButton
+              color="neutral"
+              variant="solid"
+              size="lg"
+              class="w-full justify-start text-left shadow-sm py-3 text-slate-600 dark:text-slate-600"
+              @click="selectSymptom(symptom)"
+            >
+              {{ symptom.label }}
+            </UButton>
 
-        <!-- Mesajul de validare (afișat la click) -->
-        <div
-          v-if="selectedMessage"
-          class="mt-6 p-4 rounded-xl bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 transition-all"
-        >
-          <p class="text-green-800 dark:text-green-200 font-medium text-center">
-            {{ selectedMessage }}
-          </p>
+            <!-- Mesajul de validare mutat aici -->
+            <transition
+              enter-active-class="transition-all duration-500 ease-out overflow-hidden"
+              enter-from-class="opacity-0 max-h-0"
+              enter-to-class="opacity-100 max-h-96"
+              leave-active-class="transition-all duration-300 ease-in overflow-hidden"
+              leave-from-class="opacity-100 max-h-96"
+              leave-to-class="opacity-0 max-h-0"
+            >
+              <div v-if="activeSymptomId === symptom.id">
+                <div class="mt-2 p-4 rounded-xl bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800">
+                  <p class="text-green-800 dark:text-green-200 font-medium text-center">
+                    {{ symptom.message }}
+                  </p>
+                </div>
+              </div>
+            </transition>
+          </div>
         </div>
       </div>
 
@@ -143,9 +155,10 @@ const symptoms = [
   }
 ]
 
-const selectedMessage = ref('')
+const activeSymptomId = ref<string | null>(null)
 
 const selectSymptom = (symptom: typeof symptoms[0]) => {
-  selectedMessage.value = symptom.message
+  // Închide mesajul dacă se apasă pe același buton, altfel îl deschide pe cel nou
+  activeSymptomId.value = activeSymptomId.value === symptom.id ? null : symptom.id
 }
 </script>
