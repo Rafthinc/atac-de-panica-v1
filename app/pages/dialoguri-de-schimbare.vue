@@ -65,66 +65,70 @@
           </div>
 
           <div class="grid gap-4 relative">
-            <button
+            <div
               v-for="(option, idx) in selectedFear.questions[currentQuestionIndex].options"
               :key="idx"
-              class="p-6 text-left rounded-2xl bg-slate-900 border-2 transition-all shadow-lg flex items-center justify-between gap-4"
-              :class="[
-                (!feedback || feedback.selectedIdx !== idx) ? 'border-slate-800 hover:border-blue-500 text-white active:scale-95' : '',
-                (feedback && feedback.selectedIdx === idx && !option.correct) ? 'border-red-500 bg-red-500/10 text-white' : '',
-                (feedback && feedback.selectedIdx === idx && option.correct) ? 'border-green-500 bg-green-500/10 text-white' : ''
-              ]"
-              @click="handleAnswer(option, idx)"
+              class="flex flex-col gap-2"
             >
-              <span class="font-bold text-lg">{{ option.text }}</span>
-              <UIcon
-                v-if="feedback && feedback.selectedIdx === idx && option.correct"
-                name="i-lucide-check"
-                class="w-6 h-6 text-green-500 flex-shrink-0"
-              />
-              <UIcon
-                v-if="feedback && feedback.selectedIdx === idx && !option.correct"
-                name="i-lucide-x"
-                class="w-6 h-6 text-red-500 flex-shrink-0"
-              />
-            </button>
-          </div>
+              <button
+                class="p-6 text-left rounded-2xl bg-slate-900 border-2 transition-all shadow-lg flex items-center justify-between gap-4"
+                :class="[
+                  (!feedback || feedback.selectedIdx !== idx) ? 'border-slate-800 hover:border-blue-500 text-white active:scale-95' : '',
+                  (feedback && feedback.selectedIdx === idx && !option.correct) ? 'border-red-500 bg-red-500/10 text-white' : '',
+                  (feedback && feedback.selectedIdx === idx && option.correct) ? 'border-green-500 bg-green-500/10 text-white' : ''
+                ]"
+                @click="handleAnswer(option, idx)"
+              >
+                <span class="font-bold text-lg">{{ option.text }}</span>
+                <UIcon
+                  v-if="feedback && feedback.selectedIdx === idx && option.correct"
+                  name="i-lucide-check"
+                  class="w-6 h-6 text-green-500 flex-shrink-0"
+                />
+                <UIcon
+                  v-if="feedback && feedback.selectedIdx === idx && !option.correct"
+                  name="i-lucide-x"
+                  class="w-6 h-6 text-red-500 flex-shrink-0"
+                />
+              </button>
 
-          <Transition name="fade-slide">
-            <div
-              v-if="feedback && feedback.type === 'error'"
-              class="mt-6 p-5 rounded-2xl bg-red-950/40 border border-red-900 text-red-200"
-            >
-              <div class="flex items-start gap-3">
-                <UIcon
-                  name="i-lucide-alert-triangle"
-                  class="w-6 h-6 flex-shrink-0 text-red-400 mt-0.5"
-                />
-                <div>
-                  <p class="font-bold text-red-300 mb-1">
-                    Mai gândește-te o dată
-                  </p>
-                  <p class="text-sm leading-relaxed">
-                    {{ feedback.message }}
-                  </p>
+              <Transition name="fade-slide">
+                <div
+                  v-if="feedback && feedback.selectedIdx === idx && feedback.type === 'error'"
+                  class="p-5 rounded-2xl bg-red-950/40 border border-red-900 text-red-200"
+                >
+                  <div class="flex items-start gap-3">
+                    <UIcon
+                      name="i-lucide-alert-triangle"
+                      class="w-6 h-6 flex-shrink-0 text-red-400 mt-0.5"
+                    />
+                    <div>
+                      <p class="font-bold text-red-300 mb-1">
+                        Mai gândește-te o dată
+                      </p>
+                      <p class="text-sm leading-relaxed">
+                        {{ feedback.message }}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+                <div
+                  v-else-if="feedback && feedback.selectedIdx === idx && feedback.type === 'success'"
+                  class="p-5 rounded-2xl bg-green-950/40 border border-green-900 text-green-200"
+                >
+                  <div class="flex items-center gap-3">
+                    <UIcon
+                      name="i-lucide-check-circle"
+                      class="w-6 h-6 flex-shrink-0 text-green-400"
+                    />
+                    <p class="font-bold text-green-300">
+                      {{ feedback.message }}
+                    </p>
+                  </div>
+                </div>
+              </Transition>
             </div>
-            <div
-              v-else-if="feedback && feedback.type === 'success'"
-              class="mt-6 p-5 rounded-2xl bg-green-950/40 border border-green-900 text-green-200"
-            >
-              <div class="flex items-center gap-3">
-                <UIcon
-                  name="i-lucide-check-circle"
-                  class="w-6 h-6 flex-shrink-0 text-green-400"
-                />
-                <p class="font-bold text-green-300">
-                  {{ feedback.message }}
-                </p>
-              </div>
-            </div>
-          </Transition>
+          </div>
         </div>
       </Transition>
     </main>
