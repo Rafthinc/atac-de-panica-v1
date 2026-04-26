@@ -12,25 +12,32 @@
       </div>
 
       <!-- Pasul 1: Ancorarea fizică (Cercul de respirație) -->
-      <div class="flex justify-center py-10 relative h-64">
+      <div class="flex justify-center py-10 relative h-64 w-full">
         <!-- Text ajutător central -->
-        <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-          <span
-            class="text-sky-800 dark:text-sky-100 font-medium text-lg transition-opacity duration-1000"
-            :class="{ 'opacity-100': isBreathingIn, 'opacity-50': !isBreathingIn }"
-          >
-            {{ isBreathingIn ? 'Inspiră...' : 'Expiră...' }}
+        <div class="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none">
+          <span class="text-5xl font-bold text-sky-800 dark:text-sky-100 tabular-nums drop-shadow-sm mb-1">
+            {{ timeLeft }}
+          </span>
+          <span class="text-sky-800 dark:text-sky-100 font-medium text-sm uppercase tracking-widest drop-shadow-sm">
+            {{ currentPhase.text }}
           </span>
         </div>
 
-        <!-- Cercul animat -->
+        <!-- Cercul animat exterior -->
         <div
-          class="w-48 h-48 rounded-full bg-sky-200 dark:bg-sky-800 opacity-50 mix-blend-multiply dark:mix-blend-screen filter blur-xl transition-all duration-[4000ms] ease-in-out"
-          :class="isBreathingIn ? 'scale-150' : 'scale-75'"
+          class="absolute top-1/2 left-1/2 w-48 h-48 rounded-full bg-sky-200 dark:bg-sky-800 opacity-50 mix-blend-multiply dark:mix-blend-screen filter blur-xl transition-transform ease-linear"
+          :style="{
+            transform: `translate(-50%, -50%) scale(${isAnimating ? currentPhase.outerScale : 0.6})`,
+            transitionDuration: `${currentPhase.duration}s`
+          }"
         />
+        <!-- Cercul animat interior -->
         <div
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-sky-300 dark:bg-sky-700 opacity-60 transition-all duration-[4000ms] ease-in-out"
-          :class="isBreathingIn ? 'scale-110' : 'scale-90'"
+          class="absolute top-1/2 left-1/2 w-48 h-48 rounded-full bg-sky-300 dark:bg-sky-700 opacity-60 transition-transform ease-linear"
+          :style="{
+            transform: `translate(-50%, -50%) scale(${isAnimating ? currentPhase.innerScale : 0.5})`,
+            transitionDuration: `${currentPhase.duration}s`
+          }"
         />
       </div>
 
@@ -94,23 +101,42 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 // Stocăm timpul la care s-a intrat pe pagină și o stare globală pentru progres
 const sessionDuration = useState<string>('sessionDuration', () => '~4 min')
 let startTime = 0
 
-// Respirație
-const isBreathingIn = ref(true)
-let breathInterval: ReturnType<typeof setInterval>
+// Respirație: Inspiră (4s), Menține (2s), Expiră (6s)
+const phases = [
+  { text: 'Inspiră', duration: 4, outerScale: 1.5, innerScale: 1.2 },
+  { text: 'Menține', duration: 2, outerScale: 1.5, innerScale: 1.2 },
+  { text: 'Expiră', duration: 6, outerScale: 0.6, innerScale: 0.5 }
+]
+
+const currentPhaseIndex = ref(0)
+const currentPhase = computed(() => phases[currentPhaseIndex.value]!)
+const timeLeft = ref(phases[0]!.duration)
+const isAnimating = ref(false)
+
+let breathInterval: ReturnType<typeof setInterval> | null = null
 
 onMounted(() => {
   startTime = Date.now()
 
-  // Ciclu de 4 secunde inspir, 4 secunde expir
+  // Permitem DOM-ului să randeze inițial cercurile la scara minimă (scale mic)
+  setTimeout(() => {
+    isAnimating.value = true
+  }, 50)
+
   breathInterval = setInterval(() => {
-    isBreathingIn.value = !isBreathingIn.value
-  }, 4000)
+    if (timeLeft.value > 1) {
+      timeLeft.value--
+    } else {
+      currentPhaseIndex.value = (currentPhaseIndex.value + 1) % phases.length
+      timeLeft.value = phases[currentPhaseIndex.value]!.duration
+    }
+  }, 1000)
 })
 
 onUnmounted(() => {
