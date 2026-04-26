@@ -50,7 +50,7 @@
               color="neutral"
               variant="solid"
               size="lg"
-              class="w-full justify-start text-left shadow-sm py-3 text-slate-600 dark:text-slate-600"
+              class="w-full justify-start text-left shadow-sm py-3 text-slate-800 dark:text-slate-100 bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800"
               @click="selectSymptom(symptom)"
             >
               {{ symptom.label }}
