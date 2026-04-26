@@ -11,23 +11,27 @@
       <div class="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium">
         <span>Box Breathing</span>
       </div>
-      <div class="w-8"></div> <!-- Spacer for centering -->
+      <div class="w-8" /> <!-- Spacer for centering -->
     </header>
 
     <main class="w-full max-w-md flex-1 flex flex-col items-center justify-center space-y-20 relative overflow-hidden">
       <!-- Info text -->
       <div class="text-center space-y-2">
-        <h1 class="text-3xl font-bold text-slate-800 dark:text-slate-100">Respirație în 4 Timpi</h1>
-        <p class="text-slate-500 dark:text-slate-400">Urmărește cercul și respiră în ritmul lui.</p>
+        <h1 class="text-3xl font-bold text-slate-800 dark:text-slate-100">
+          Respirație în 4 Timpi
+        </h1>
+        <p class="text-slate-500 dark:text-slate-400">
+          Urmărește cercul și respiră în ritmul lui.
+        </p>
       </div>
 
       <!-- Animația de respirație -->
       <div class="relative flex items-center justify-center h-72 w-72">
         <!-- Cercul de bază (ghidaj) -->
-        <div class="absolute w-64 h-64 rounded-full border-2 border-cyan-100 dark:border-cyan-900/30"></div>
-        
+        <div class="absolute w-64 h-64 rounded-full border-2 border-cyan-100 dark:border-cyan-900/30" />
+
         <!-- Cercul animat -->
-        <div 
+        <div
           class="rounded-full bg-gradient-to-br transition-all duration-[4000ms] ease-linear flex items-center justify-center relative z-10"
           :class="[currentState.color, currentState.shadow]"
           :style="circleStyle"
@@ -42,22 +46,22 @@
 
       <!-- Indicatori de progres pentru cei 4 pași -->
       <div class="flex gap-4">
-        <div 
-          v-for="(step, index) in steps" 
+        <div
+          v-for="(step, index) in steps"
           :key="index"
           :class="[
             'h-1.5 rounded-full transition-all duration-500',
-            currentStepIndex === index 
-              ? 'bg-cyan-500 dark:bg-cyan-400 w-16' 
+            currentStepIndex === index
+              ? 'bg-cyan-500 dark:bg-cyan-400 w-16'
               : 'bg-slate-200 dark:bg-slate-800 w-8'
           ]"
-        ></div>
+        />
       </div>
     </main>
 
     <footer class="w-full max-w-md mt-12 pb-8">
       <div class="mt-4">
-        <UButton 
+        <UButton
           to="/progres"
           color="primary"
           size="xl"
@@ -77,6 +81,7 @@ const duration = 4 // 4 secunde pentru fiecare pas
 
 const currentStepIndex = ref(0)
 const timeLeft = ref(duration)
+const isAnimating = ref(false)
 
 const steps = [
   { label: 'Inspiră', scale: 1.1, color: 'from-cyan-400 to-blue-500', shadow: 'shadow-[0_0_40px_rgba(6,182,212,0.4)]' },
@@ -87,11 +92,15 @@ const steps = [
 
 const currentState = computed(() => steps[currentStepIndex.value]!)
 
-const circleStyle = computed(() => ({
-  width: `${currentState.value.scale * 14}rem`,
-  height: `${currentState.value.scale * 14}rem`,
-  opacity: currentState.value.label === 'Menține' ? 0.85 : 1
-}))
+const circleStyle = computed(() => {
+  // Forțăm cercul să plece de la scara mică (0.7), apoi folosim scala reală a stării
+  const currentScale = isAnimating.value ? currentState.value.scale : 0.7
+  return {
+    width: `${currentScale * 14}rem`,
+    height: `${currentScale * 14}rem`,
+    opacity: currentState.value.label === 'Menține' ? 0.85 : 1
+  }
+})
 
 let timer: ReturnType<typeof setInterval> | null = null
 
@@ -108,6 +117,10 @@ const runTimer = () => {
 }
 
 onMounted(() => {
+  // Permitem DOM-ului să randeze inițial cercul mic, apoi dăm startul animației
+  setTimeout(() => {
+    isAnimating.value = true
+  }, 50)
   runTimer()
 })
 

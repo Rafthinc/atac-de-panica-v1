@@ -115,7 +115,7 @@ import JSConfetti from 'js-confetti'
 import { onMounted } from 'vue'
 
 // Preluăm starea globală calculată în pagina anterioară (dacă nu există, se afișează valoarea default)
-const sessionDuration = useState<string>('sessionDuration', () => '~4 min')
+const sessionDuration = useState<string>('sessionDuration', () => '🌟')
 
 onMounted(() => {
   try {
