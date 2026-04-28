@@ -2,8 +2,8 @@
   <div class="flex-1 flex flex-col items-center min-h-[calc(100vh-theme(spacing.16))] bg-slate-50 dark:bg-slate-950 p-6">
     <header class="w-full max-w-md mb-8 pt-4">
       <div class="flex justify-between text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-3 font-medium">
-        <span>Exercițiu de Ancorare</span>
-        <span>Pas {{ currentStep + 1 }} / 5</span>
+        <span>Grounding Exercise</span>
+        <span>Step {{ currentStep + 1 }} / 5</span>
       </div>
       <div class="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
         <div 
@@ -31,7 +31,7 @@
             </h1>
           </div>
 
-          <!-- Punctele de progres pentru pasul curent -->
+          <!-- Progress dots for the current step -->
           <div class="flex justify-center gap-4 mt-8 h-8 items-center">
             <div 
               v-for="i in currentStepData.count" 
@@ -57,10 +57,10 @@
         :variant="isStepComplete ? 'solid' : 'outline'"
       >
         <template v-if="!isStepComplete">
-          Am găsit unul
+          I found one
         </template>
         <template v-else>
-          Treci la următorul simț <UIcon name="i-lucide-arrow-right" class="ml-2 w-5 h-5" />
+          Move to next sense <UIcon name="i-lucide-arrow-right" class="ml-2 w-5 h-5" />
         </template>
       </UButton>
       
@@ -72,7 +72,7 @@
           size="lg"
           class="w-full justify-center py-3 text-slate-500 dark:text-slate-400"
         >
-          Oprește exercițiul
+          Stop exercise
         </UButton>
       </div>
     </footer>
@@ -88,36 +88,36 @@ const currentStep = ref(0)
 const itemsFound = ref(0)
 
 const steps = [
-  { number: "5", instruction: "Lucruri pe care le poți VEDEA în jurul tău", icon: "i-lucide-eye", count: 5 },
-  { number: "4", instruction: "Lucruri pe care le poți ATINGE acum", icon: "i-lucide-hand", count: 4 },
-  { number: "3", instruction: "Sunete pe care le poți AUZI", icon: "i-lucide-ear", count: 3 },
-  { number: "2", instruction: "Mirosuri pe care le poți SIMȚI", icon: "i-lucide-flower-2", count: 2 },
-  { number: "1", instruction: "Lucru pe care îl poți GUSTA", icon: "i-lucide-utensils", count: 1 }
+  { number: "5", instruction: "Things you can SEE around you", icon: "i-lucide-eye", count: 5 },
+  { number: "4", instruction: "Things you can TOUCH right now", icon: "i-lucide-hand", count: 4 },
+  { number: "3", instruction: "Sounds you can HEAR", icon: "i-lucide-ear", count: 3 },
+  { number: "2", instruction: "Smells you can NOTICE", icon: "i-lucide-flower-2", count: 2 },
+  { number: "1", instruction: "Thing you can TASTE", icon: "i-lucide-utensils", count: 1 }
 ]
 
 const currentStepData = computed(() => steps[currentStep.value]!)
 const isStepComplete = computed(() => itemsFound.value >= currentStepData.value.count)
 
 const itemClick = () => {
-  // Dacă pasul e gata, trecem la următorul
+  // If the step is complete, move to the next one
   if (isStepComplete.value) {
     if (currentStep.value < steps.length - 1) {
       currentStep.value++
       itemsFound.value = 0
     } else {
-      // Final de exercițiu, mergem la pagina de progres
+      // End of exercise, go to the progress page
       router.push('/progres')
     }
   } else {
-    // Altfel, bifăm un item
+    // Otherwise, check off an item
     itemsFound.value++
-    // Haptic feedback pe dispozitivele mobile (dacă e suportat)
+    // Haptic feedback on mobile devices (if supported)
     try {
       if (typeof navigator !== 'undefined' && navigator.vibrate) {
         navigator.vibrate(50)
       }
     } catch (e) {
-      // ignoră eroarea
+      // ignore error
     }
   }
 }

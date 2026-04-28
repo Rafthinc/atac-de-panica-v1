@@ -2,7 +2,7 @@
   <div class="flex-1 flex flex-col items-center min-h-[calc(100vh-theme(spacing.16))] bg-slate-50 dark:bg-slate-950 p-6">
     <header class="w-full max-w-md mb-8 pt-4">
       <div class="flex justify-between items-center mb-2 text-sm text-slate-500 dark:text-slate-400">
-        <span class="font-medium text-slate-700 dark:text-slate-300">Lecția 1: Mecanismul</span>
+        <span class="font-medium text-slate-700 dark:text-slate-300">Lesson 1: The Mechanism</span>
         <span>{{ Math.round((currentStep / steps.length) * 100) }}%</span>
       </div>
       <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
@@ -64,7 +64,7 @@
           color="primary"
           class="w-full justify-center py-4 text-lg font-bold rounded-2xl shadow-lg transition-transform active:scale-[0.98]"
         >
-          {{ currentStep === steps.length ? 'Am înțeles' : 'Continuă' }}
+          {{ currentStep === steps.length ? 'I understand' : 'Continue' }}
         </UButton>
         <UButton 
           v-if="currentStep > 1"
@@ -74,7 +74,7 @@
           size="lg"
           class="w-full justify-center py-3 text-slate-500 dark:text-slate-400"
         >
-          Înapoi
+          Back
         </UButton>
       </footer>
     </main>
@@ -89,18 +89,18 @@ const currentStep = ref(1)
 
 const steps = [
   {
-    title: "Panica este un sistem de alarmă.",
-    content: "Imaginează-ți că în corpul tău există o alarmă de incendiu. Uneori, ea pornește chiar dacă nu există fum. Aceasta este panica: o alarmă falsă.",
+    title: "Panic is an alarm system.",
+    content: "Imagine there is a fire alarm in your body. Sometimes, it goes off even if there is no smoke. This is panic: a false alarm.",
     animation: "alarm"
   },
   {
-    title: "Interpretarea Greșită",
-    content: "Creierul simte inima bătând tare și trage concluzia: 'E un pericol!'. UX-ul panicii este o buclă de feedback între o senzație fizică și o interpretare catastrofică.",
+    title: "Misinterpretation",
+    content: "The brain feels the heart beating fast and concludes: 'There is a danger!'. The UX of panic is a feedback loop between a physical sensation and a catastrophic interpretation.",
     animation: "loop"
   },
   {
-    title: "Adrenalina",
-    content: "Senzațiile pe care le simți (amețeală, tremur) sunt doar efectele adrenalinei care pregătește corpul pentru efort. Nu sunt semne de boală, ci de energie nefolosită.",
+    title: "Adrenaline",
+    content: "The sensations you feel (dizziness, trembling) are just the effects of adrenaline preparing the body for effort. They are not signs of illness, but of unused energy.",
     animation: "energy"
   }
 ]

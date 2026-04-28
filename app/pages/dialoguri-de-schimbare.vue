@@ -10,7 +10,7 @@
           class="rounded-full bg-slate-900 hover:bg-slate-800 text-slate-300"
         />
         <h1 class="text-xl font-medium text-slate-100">
-          Restructurare Cognitivă
+          Cognitive Restructuring
         </h1>
       </div>
       <div
@@ -18,7 +18,7 @@
         class="space-y-2"
       >
         <div class="flex justify-end text-[10px] uppercase tracking-[0.2em] text-blue-400">
-          <span>Pas {{ currentQuestionIndex + 1 }} / 3</span>
+          <span>Step {{ currentQuestionIndex + 1 }} / 3</span>
         </div>
         <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
           <div
@@ -39,7 +39,7 @@
           class="space-y-6"
         >
           <h1 class="text-3xl font-bold text-blue-50 italic">
-            Ce gând te apasă?
+            What thought is weighing on you?
           </h1>
           <div class="grid gap-3">
             <button
@@ -105,7 +105,7 @@
                     />
                     <div>
                       <p class="font-bold text-red-300 mb-1">
-                        Mai gândește-te o dată
+                        Think again
                       </p>
                       <p class="text-sm leading-relaxed">
                         {{ feedback.message }}
@@ -157,7 +157,7 @@ const handleAnswer = async (option, idx) => {
   if (!option.correct) {
     feedback.value = { type: 'error', message: option.explanation, selectedIdx: idx }
   } else {
-    feedback.value = { type: 'success', message: 'Corect! Ai aplicat perfect rațiunea.', selectedIdx: idx }
+    feedback.value = { type: 'success', message: 'Correct! You applied logic perfectly.', selectedIdx: idx }
 
     setTimeout(() => {
       feedback.value = null
@@ -182,216 +182,216 @@ const handleAnswer = async (option, idx) => {
 const dialogData = [
   {
     id: 'heart',
-    thought: 'Voi face un atac de cord',
+    thought: 'I will have a heart attack',
     questions: [
       {
-        q: 'Ce dovadă ai că de data aceasta vei face un atac de cord, având în vedere că nu ai făcut niciodată unul în sutele de dăți când ai crezut asta?',
+        q: 'What proof do you have that this time you will have a heart attack, considering you never had one in the hundreds of times you thought so?',
         options: [
-          { text: 'Nicio dovadă factuală, doar ce simt', correct: true },
-          { text: 'Faptul că inima bate tare', correct: false, explanation: 'Ritmul cardiac crescut este doar un semn că ai adrenalină în sânge, nu o dovadă a unui infarct. Este un răspuns natural de "luptă sau fugi".' }
+          { text: 'No factual proof, just what I feel', correct: true },
+          { text: 'The fact that my heart beats fast', correct: false, explanation: 'Increased heart rate is just a sign that you have adrenaline in your blood, not proof of a heart attack. It is a natural "fight or flight" response.' }
         ]
       },
       {
-        q: 'Care este probabilitatea matematică să faci un infarct acum, dacă inima ta a rezistat perfect la toate cele 50 de crize anterioare?',
+        q: 'What is the mathematical probability of having a heart attack now, if your heart resisted perfectly in all 50 previous crises?',
         options: [
-          { text: 'Aproape zero', correct: true },
-          { text: 'Foarte mare, corpul cedează', correct: false, explanation: 'Inima este un mușchi care se antrenează la efort, nu o mașinărie care se strică de la panică.' }
+          { text: 'Almost zero', correct: true },
+          { text: 'Very high, my body is giving up', correct: false, explanation: 'The heart is a muscle that trains with effort, not a machine that breaks from panic.' }
         ]
       },
       {
-        q: 'Dacă un prieten ar avea aceleași simptome și ar fi supraviețuit de 100 de ori, i-ai spune că va muri acum sau că e doar panică?',
+        q: 'If a friend had the same symptoms and survived 100 times, would you tell him he will die now or that it\'s just panic?',
         options: [
-          { text: 'I-aș spune că e doar panică', correct: true },
-          { text: 'L-aș duce direct la urgențe', correct: false, explanation: 'Adesea suntem mult mai obiectivi cu alții decât cu noi înșine. Aplică aceeași compasiune rațională și pentru tine.' }
+          { text: 'I would tell him it\'s just panic', correct: true },
+          { text: 'I would take him straight to the ER', correct: false, explanation: 'We are often much more objective with others than with ourselves. Apply the same rational compassion to yourself.' }
         ]
       }
     ]
   },
   {
     id: 'faint',
-    thought: 'Voi leșina',
+    thought: 'I will faint',
     questions: [
       {
-        q: 'Știai că leșinul apare când tensiunea scade, iar în panică tensiunea CREȘTE? Poate inima să facă ambele lucruri deodată?',
+        q: 'Did you know that fainting occurs when blood pressure drops, and in panic blood pressure INCREASES? Can the heart do both at once?',
         options: [
-          { text: 'E biologic imposibil să leșin', correct: true },
-          { text: 'Nu contează, simt că pic', correct: false, explanation: 'Senzația vine de la hiperventilație (prea mult oxigen) și tensiune musculară, nu este un leșin real.' }
+          { text: 'It\'s biologically impossible to faint', correct: true },
+          { text: 'It doesn\'t matter, I feel like falling', correct: false, explanation: 'The sensation comes from hyperventilation (too much oxygen) and muscle tension, it\'s not real fainting.' }
         ]
       },
       {
-        q: 'De câte ori ai simțit că leșini și totuși ai rămas în picioare până la finalul crizei?',
+        q: 'How many times have you felt like fainting and still stood on your feet until the end of the crisis?',
         options: [
-          { text: 'De fiecare dată', correct: true },
-          { text: 'Sigur acum va fi prima oară', correct: false, explanation: 'Acesta e "ghicitul viitorului". Bazează-te pe zecile de experiențe anterioare în care ai rămas perfect conștient.' }
+          { text: 'Every single time', correct: true },
+          { text: 'Surely this will be the first time', correct: false, explanation: 'This is "fortune telling". Rely on the dozens of previous experiences where you stayed perfectly conscious.' }
         ]
       },
       {
-        q: 'Ce este mai probabil: să se schimbe legile fiziologiei acum, sau să fie doar o amețeală inofensivă de la respirație?',
+        q: 'What is more likely: the laws of physiology changing now, or just harmless dizziness from breathing?',
         options: [
-          { text: 'O amețeală inofensivă', correct: true },
-          { text: 'Corpul meu cedează', correct: false, explanation: 'Raționamentul emoțional te minte: senzația de pericol nu înseamnă că pericolul este real.' }
+          { text: 'A harmless dizziness', correct: true },
+          { text: 'My body is giving out', correct: false, explanation: 'Emotional reasoning lies to you: the feeling of danger does not mean the danger is real.' }
         ]
       }
     ]
   },
   {
     id: 'stroke',
-    thought: 'Voi face un accident vascular',
+    thought: 'I will have a stroke',
     questions: [
       {
-        q: 'Ai dificultăți reale de vorbire sau paralizie, ori este doar o senzație de furnicături cauzată de oxigenarea rapidă?',
+        q: 'Do you have real speech difficulties or paralysis, or is it just a tingling sensation caused by rapid oxygenation?',
         options: [
-          { text: 'Este doar o senzație de amorțeală', correct: true },
-          { text: 'Dacă se transformă în paralizie?', correct: false, explanation: 'Furnicăturile vin din schimbarea pH-ului sângelui cauzată de respirația prea rapidă. Sunt perfect inofensive.' }
+          { text: 'It\'s just a numbness sensation', correct: true },
+          { text: 'What if it turns into paralysis?', correct: false, explanation: 'Tingling comes from the blood\'s pH change caused by breathing too fast. They are perfectly harmless.' }
         ]
       },
       {
-        q: 'Dacă un medic ți-ar spune că vasele tale de sânge sunt sănătoase, cine are dreptate: medicul sau panica?',
+        q: 'If a doctor told you your blood vessels are healthy, who is right: the doctor or the panic?',
         options: [
-          { text: 'Medicul și faptele', correct: true },
-          { text: 'Panica, o simt prea puternic', correct: false, explanation: 'Simptomele fizice intense sunt produse de frică, nu de starea organelor tale interne.' }
+          { text: 'The doctor and the facts', correct: true },
+          { text: 'The panic, I feel it too strongly', correct: false, explanation: 'Intense physical symptoms are produced by fear, not the state of your internal organs.' }
         ]
       },
       {
-        q: 'Furnicăturile apar de 10 minute. Dacă era un AVC, starea se îmbunătățea de la sine în timpul respirației?',
+        q: 'The tingling has been appearing for 10 minutes. If it were a stroke, would the condition improve by itself during breathing?',
         options: [
-          { text: 'Nu, faptul că trece confirmă panica', correct: true },
-          { text: 'Oricum este periculos', correct: false, explanation: 'AVC-urile nu "vin și trec" la comanda unui exercițiu de respirație. Panica da.' }
+          { text: 'No, the fact that it passes confirms the panic', correct: true },
+          { text: 'It\'s dangerous anyway', correct: false, explanation: 'Strokes don\'t "come and go" on command of a breathing exercise. Panic does.' }
         ]
       }
     ]
   },
   {
     id: 'control',
-    thought: 'Voi înnebuni / Pierd controlul',
+    thought: 'I will go crazy / I\'m losing control',
     questions: [
       {
-        q: 'A înnebuni înseamnă pierderea contactului cu realitatea. Faptul că ești atât de conștient de ce simți indică nebunie sau hiper-vigilență?',
+        q: 'Going crazy means losing touch with reality. Does the fact that you are so aware of how you feel indicate madness or hyper-vigilance?',
         options: [
-          { text: 'Hiper-vigilență (prea multă atenție)', correct: true },
-          { text: 'Simt că îmi pierd mințile', correct: false, explanation: 'Cei care au un episod psihotic pierd conștientizarea stării lor. Frica ta profundă este tocmai dovada rațiunii tale intacte.' }
+          { text: 'Hyper-vigilance (too much attention)', correct: true },
+          { text: 'I feel like I\'m losing my mind', correct: false, explanation: 'Those who have a psychotic episode lose awareness of their state. Your deep fear is exactly the proof of your intact reason.' }
         ]
       },
       {
-        q: 'Dacă ai fi pierdut controlul, ai mai fi capabil să urmezi acest quiz acum?',
+        q: 'If you had lost control, would you still be able to follow this quiz right now?',
         options: [
-          { text: 'Faptul că răspund dovedește controlul', correct: true },
-          { text: 'E doar o chestiune de timp', correct: false, explanation: 'Pierderea controlului ar însemna imposibilitatea de a procesa logic informații. Tu încă citești și analizezi perfect.' }
+          { text: 'The fact that I answer proves control', correct: true },
+          { text: 'It\'s just a matter of time', correct: false, explanation: 'Loss of control would mean the inability to logically process information. You are still reading and analyzing perfectly.' }
         ]
       },
       {
-        q: 'A pierdut cineva vreodată controlul total în timpul unui atac de panică?',
+        q: 'Has anyone ever completely lost control during a panic attack?',
         options: [
-          { text: 'Nimeni nu a înnebunit din panică', correct: true },
-          { text: 'Mintea mea nu mai face față', correct: false, explanation: 'Creierul tău este stresat de prea multă adrenalină, nu este "stricat". Panica nu declanșează nebunia.' }
+          { text: 'No one has ever gone crazy from panic', correct: true },
+          { text: 'My mind can\'t handle it anymore', correct: false, explanation: 'Your brain is stressed by too much adrenaline, it is not "broken". Panic does not trigger madness.' }
         ]
       }
     ]
   },
   {
     id: 'choke',
-    thought: 'Mă voi sufoca',
+    thought: 'I will suffocate',
     questions: [
       {
-        q: 'Dacă gâtul ar fi blocat, ai mai putea să înghiți salivă sau să vorbești?',
+        q: 'If your throat were blocked, would you still be able to swallow saliva or speak?',
         options: [
-          { text: 'Pot înghiți, deci aerul intră', correct: true },
-          { text: 'Simt cum se închide', correct: false, explanation: 'Senzația de nod în gât este dată de contracția mușchilor gâtului de la stres, nu este un blocaj fizic al traheei.' }
+          { text: 'I can swallow, so air goes in', correct: true },
+          { text: 'I feel it closing', correct: false, explanation: 'The lump in the throat sensation is given by the contraction of the throat muscles from stress, it is not a physical blockage of the trachea.' }
         ]
       },
       {
-        q: 'Senzația de nod în gât este o contracție musculară. Poate un mușchi contractat să oprească respirația automată?',
+        q: 'The lump in the throat sensation is a muscle contraction. Can a contracted muscle stop automatic breathing?',
         options: [
-          { text: 'Nu, respirația este autonomă', correct: true },
-          { text: 'Voi uita să respir', correct: false, explanation: 'Reflexul de respirație este controlat de trunchiul cerebral și nu poate fi oprit de mușchii tensionați. Corpul tău va respira singur.' }
+          { text: 'No, breathing is autonomic', correct: true },
+          { text: 'I will forget to breathe', correct: false, explanation: 'The breathing reflex is controlled by the brainstem and cannot be stopped by tense muscles. Your body will breathe on its own.' }
         ]
       },
       {
-        q: 'Ai pățit asta de zeci de ori. Te-ai sufocat vreodată cu adevărat?',
+        q: 'You\'ve been through this dozens of times. Have you ever truly suffocated?',
         options: [
-          { text: 'Nu, am supraviețuit mereu', correct: true },
-          { text: 'Acum mă voi sufoca sigur', correct: false, explanation: 'Frica ta încearcă să găsească o scuză nouă. Rămâi la fapte: ai supraviețuit în 100% din cazurile anterioare.' }
+          { text: 'No, I have always survived', correct: true },
+          { text: 'Now I will suffocate for sure', correct: false, explanation: 'Your fear is trying to find a new excuse. Stick to the facts: you have survived in 100% of previous cases.' }
         ]
       }
     ]
   },
   {
     id: 'fall',
-    thought: 'Voi cădea din picioare',
+    thought: 'I will collapse',
     questions: [
       {
-        q: 'Picioarele se simt moi pentru că vasele de sânge s-au dilatat pentru efort. Este asta slăbiciune sau pregătire pentru acțiune?',
+        q: 'Your legs feel weak because the blood vessels have dilated for effort. Is this weakness or preparation for action?',
         options: [
-          { text: 'Pregătire pentru acțiune (fugă)', correct: true },
-          { text: 'Corpul meu e prea slab', correct: false, explanation: 'Din contră! Mușchii tăi au primit mai mult sânge pentru a te feri de un potențial pericol. Sunt mai puternici acum.' }
+          { text: 'Preparation for action (flight)', correct: true },
+          { text: 'My body is too weak', correct: false, explanation: 'On the contrary! Your muscles have received more blood to keep you safe from potential danger. They are stronger now.' }
         ]
       },
       {
-        q: 'Te-ai prăbușit vreodată fizic în timpul unui atac, sau doar te-ai ținut de ceva de frică?',
+        q: 'Have you ever physically collapsed during an attack, or did you just hold on to something out of fear?',
         options: [
-          { text: 'Nu am căzut niciodată din cauza panicii', correct: true },
-          { text: 'Am leșinat odată', correct: false, explanation: 'A cădea din alte cauze (tensiune mică, lipsă de zahăr) este complet diferit. Panica crește tensiunea arterială, menținându-te pe picioare.' }
+          { text: 'I have never fallen because of panic', correct: true },
+          { text: 'I fainted once', correct: false, explanation: 'Falling for other reasons (low blood pressure, lack of sugar) is completely different. Panic increases blood pressure, keeping you on your feet.' }
         ]
       },
       {
-        q: 'Dacă picioarele ar fi cedat cu adevărat, ai mai putea sta acum în picioare sau pe scaun?',
+        q: 'If your legs had truly given out, would you still be able to stand or sit in a chair right now?',
         options: [
-          { text: 'Picioarele încă mă susțin bine', correct: true },
-          { text: 'Doar mă chinui să nu cad', correct: false, explanation: 'Echilibrul tău este intact. Amețeala ușoară indusă de respirația rapidă doar îți distorsionează percepția spațială.' }
+          { text: 'My legs are still supporting me well', correct: true },
+          { text: 'I\'m just struggling not to fall', correct: false, explanation: 'Your balance is intact. The slight dizziness induced by rapid breathing only distorts your spatial perception.' }
         ]
       }
     ]
   },
   {
     id: 'death',
-    thought: 'Voi muri',
+    thought: 'I will die',
     questions: [
       {
-        q: 'Dacă panica ar fi fatală, ar mai exista milioane de oameni care suferă de ea de zeci de ani?',
+        q: 'If panic were fatal, would there still be millions of people suffering from it for decades?',
         options: [
-          { text: 'Este doar o reacție falsă de alarmă', correct: true },
-          { text: 'Inima mea va ceda curând', correct: false, explanation: 'Panica provoacă doar un efort moderat pentru corp, complet inofensiv pe termen scurt, comparabil cu o alergare ușoară.' }
+          { text: 'It\'s just a false alarm reaction', correct: true },
+          { text: 'My heart will fail soon', correct: false, explanation: 'Panic causes only moderate effort for the body, completely harmless in the short term, comparable to a light jog.' }
         ]
       },
       {
-        q: 'Care este rata de deces cauzată strict de un atac de panică în istoria medicinei?',
+        q: 'What is the death rate caused strictly by a panic attack in the history of medicine?',
         options: [
-          { text: 'Absolut zero', correct: true },
-          { text: 'Unii sigur mor din asta', correct: false, explanation: 'Atacul de panică este, biologic vorbind, un mecanism perfect conceput să TE SALVEZE de pericol, nu să te omoare.' }
+          { text: 'Absolutely zero', correct: true },
+          { text: 'Some surely die from this', correct: false, explanation: 'A panic attack is, biologically speaking, a mechanism perfectly designed to SAVE YOU from danger, not to kill you.' }
         ]
       },
       {
-        q: 'Simți că mori sau simți că ești extrem de viu și alertat (inimă rapidă, respirație activă)?',
+        q: 'Do you feel you are dying or do you feel extremely alive and alert (fast heart, active breathing)?',
         options: [
-          { text: 'Sunt extrem de viu și alert', correct: true },
-          { text: 'Simt că mă sting', correct: false, explanation: 'Adrenalina pompează sânge la toate organele vitale. Senzația este copleșitoare tocmai pentru că trupul lucrează la capacitate maximă.' }
+          { text: 'I am extremely alive and alert', correct: true },
+          { text: 'I feel I\'m fading', correct: false, explanation: 'Adrenaline pumps blood to all vital organs. The sensation is overwhelming precisely because the body is working at full capacity.' }
         ]
       }
     ]
   },
   {
     id: 'trapped',
-    thought: 'Nu pot ieși de aici / Sunt captiv',
+    thought: 'I can\'t get out of here / I\'m trapped',
     questions: [
       {
-        q: 'Ești captiv fizic sau ești blocat doar de frica de a nu te face de râs dacă pleci?',
+        q: 'Are you physically trapped or just blocked by the fear of embarrassing yourself if you leave?',
         options: [
-          { text: 'Sunt blocat doar de frică', correct: true },
-          { text: 'Sunt blocat fizic, nu am scăpare', correct: false, explanation: 'Privește în jur. Poți pleca oricând vrei, frica este cea care îți pune de fapt bariere invizibile.' }
+          { text: 'I am blocked only by fear', correct: true },
+          { text: 'I am physically trapped, I have no escape', correct: false, explanation: 'Look around. You can leave whenever you want, fear is what actually puts invisible barriers up.' }
         ]
       },
       {
-        q: 'Ce s-ar întâmpla dacă ai ieși pur și simplu? S-ar prăbuși lumea sau doar s-ar reduce anxietatea?',
+        q: 'What would happen if you simply walked out? Would the world collapse or would your anxiety just reduce?',
         options: [
-          { text: 'Aș constata că nu se întâmplă nimic', correct: true },
-          { text: 'M-aș face de râs', correct: false, explanation: 'Chiar dacă unii ar observa, o clipă de stânjeneală trecătoare nu este o catastrofă permanentă. Poți pleca pentru a-ți asigura confortul.' }
+          { text: 'I would find out nothing happens', correct: true },
+          { text: 'I would embarrass myself', correct: false, explanation: 'Even if some noticed, a moment of fleeting awkwardness is not a permanent catastrophe. You can leave to ensure your comfort.' }
         ]
       },
       {
-        q: 'Captivitatea este o senzație sau un fapt real în acest moment?',
+        q: 'Is feeling trapped a sensation or a real fact right now?',
         options: [
-          { text: 'Este doar o senzație temporară', correct: true },
-          { text: 'Este real, nimeni nu mă poate ajuta', correct: false, explanation: 'Nu ai nevoie să fii "salvat". Adrenalina te face să vrei să scapi. E suficient doar să aștepți ca nivelul ei să scadă natural.' }
+          { text: 'It is just a temporary sensation', correct: true },
+          { text: 'It is real, nobody can help me', correct: false, explanation: 'You don\'t need to be "saved". Adrenaline makes you want to escape. It is enough just to wait for its level to drop naturally.' }
         ]
       }
     ]

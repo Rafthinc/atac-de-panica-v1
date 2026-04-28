@@ -1,7 +1,7 @@
 <template>
   <div class="flex-1 flex flex-col items-center justify-center p-6 bg-gradient-to-t from-emerald-50 to-white dark:from-emerald-950 dark:to-slate-950">
     <div class="max-w-md w-full space-y-10 text-center">
-      <!-- Iconiță de succes / feedback vizual -->
+      <!-- Success icon / visual feedback -->
       <div class="flex justify-center">
         <div class="w-32 h-32 bg-emerald-100 dark:bg-emerald-900/50 rounded-full flex items-center justify-center text-emerald-500 dark:text-emerald-400">
           <UIcon
@@ -11,21 +11,21 @@
         </div>
       </div>
 
-      <!-- Mesajul de confirmare -->
+      <!-- Confirmation message -->
       <div class="space-y-4">
         <h1 class="text-3xl font-bold text-slate-800 dark:text-slate-100">
-          Ai reușit!
+          You did it!
         </h1>
         <p class="text-lg text-slate-600 dark:text-slate-400">
-          Ai demonstrat încă o dată că poți face față. Ai trecut peste acest episod. Fii mândru/ă de tine!
+          You demonstrated once again that you can cope. You got through this episode. Be proud of yourself!
         </p>
       </div>
 
-      <!-- Statistici rapide (Micro-succes) -->
+      <!-- Quick stats (Micro-success) -->
       <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 p-6 flex justify-around">
         <div class="text-center">
           <p class="text-sm text-slate-500 mb-1">
-            Durată
+            Duration
           </p>
           <p class="text-2xl font-semibold text-emerald-600 dark:text-emerald-400">
             {{ sessionDuration }}
@@ -36,12 +36,12 @@
             Status
           </p>
           <p class="text-2xl font-semibold text-emerald-600 dark:text-emerald-400">
-            Reglat
+            Regulated
           </p>
         </div>
       </div>
 
-      <!-- Întoarcere la Home -->
+      <!-- Return Home -->
       <div class="pt-6">
         <UButton
           to="/"
@@ -51,11 +51,11 @@
           icon="i-lucide-home"
           class="px-8 rounded-full"
         >
-          Înapoi acasă
+          Back home
         </UButton>
       </div>
 
-      <!-- Date Contact / Profil Specialist -->
+      <!-- Contact Details / Specialist Profile -->
       <div class="bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-emerald-100 dark:border-emerald-900/30 p-6 rounded-2xl shadow-sm text-left relative overflow-hidden mt-8">
         <div class="absolute top-0 left-0 w-1.5 h-full bg-emerald-400 dark:bg-emerald-500" />
 
@@ -71,14 +71,14 @@
               Adrian-Francois
             </h2>
             <p class="text-[11px] font-medium text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
-              Dezvoltator IT & Specialist
+              IT Developer & Specialist
             </p>
           </div>
         </div>
 
         <p class="text-sm text-slate-700 dark:text-slate-300 mb-5 leading-relaxed">
-          <strong>Psiholog, Psihoterapeut, Nutriționist & Dezvoltator IT.</strong><br>
-          Specialist în optimizarea sănătății emoționale prin nutriție și psihologie.
+          <strong>Psychologist, Psychotherapist, Nutritionist & IT Developer.</strong><br>
+          Specialist in optimizing emotional health through nutrition and psychology.
         </p>
 
         <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-700/60">
@@ -109,12 +109,12 @@
 </template>
 
 <script setup lang="ts">
-// Această pagină oferă feedback pur pozitiv.
-// Într-o aplicație reală, timpul s-ar calcula pe baza momentului în care s-a intrat în SOS.
+// This page provides purely positive feedback.
+// In a real application, time would be calculated based on the moment SOS was entered.
 import JSConfetti from 'js-confetti'
 import { onMounted } from 'vue'
 
-// Preluăm starea globală calculată în pagina anterioară (dacă nu există, se afișează valoarea default)
+// Fetch global state calculated on previous page (if none exists, show default value)
 const sessionDuration = useState<string>('sessionDuration', () => '🌟')
 
 onMounted(() => {
@@ -125,7 +125,7 @@ onMounted(() => {
       confettiNumber: 40
     })
   } catch (e) {
-    // Ignorăm eroarea dacă librăria nu e instalată, este un efect secundar opțional
+    // Ignore error if library is not installed, it's an optional side effect
   }
 })
 </script>

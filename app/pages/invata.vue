@@ -12,15 +12,15 @@
         />
         <div>
           <h1 class="text-3xl font-semibold text-slate-800 dark:text-slate-100">
-            Prevenție și Învățare
+            Prevention and Learning
           </h1>
           <p class="text-slate-500">
-            Înțelege ce ți se întâmplă și construiește-ți uneltele pentru calm.
+            Understand what is happening to you and build your tools for calm.
           </p>
         </div>
       </div>
 
-      <!-- Grid de carduri (Don Norman: Conceptual Models) -->
+      <!-- Card grid (Don Norman: Conceptual Models) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <UCard
           v-for="(lesson, index) in lessons"
@@ -55,7 +55,7 @@
                 :to="lesson.path"
                 @click.stop
               >
-                Începe lecția
+                Start lesson
               </UButton>
             </div>
           </template>
@@ -68,8 +68,8 @@
 <script setup lang="ts">
 const lessons = [
   {
-    title: 'Mecanismul Panicii',
-    description: 'Află cum funcționează sistemul de alarmă al corpului tău (luptă sau fugi) și de ce este inofensiv, chiar dacă e neplăcut.',
+    title: 'The Mechanism of Panic',
+    description: 'Learn how your body\'s alarm system works (fight or flight) and why it is harmless, even if it is unpleasant.',
     icon: 'i-lucide-brain-circuit',
     color: '#3b82f6', // blue-500
     colorBase: 'blue',
@@ -77,8 +77,8 @@ const lessons = [
     path: '/mecanismul-panicii'
   },
   {
-    title: 'Exercițiul 5-4-3-2-1',
-    description: 'Tehnică de grounding (ancorare) pentru a te readuce în prezent folosind cele cinci simțuri.',
+    title: 'The 5-4-3-2-1 Exercise',
+    description: 'Grounding technique to bring you back to the present using your five senses.',
     icon: 'i-lucide-eye',
     color: '#10b981', // emerald-500
     colorBase: 'emerald',
@@ -86,8 +86,8 @@ const lessons = [
     path: '/exercitiul-54321'
   },
   {
-    title: 'Respirația în 4 Timpi',
-    description: 'Învață tehnica Box Breathing folosită pentru reglarea rapidă a sistemului nervos autonom.',
+    title: '4-Count Breathing',
+    description: 'Learn the Box Breathing technique used to quickly regulate the autonomic nervous system.',
     icon: 'i-lucide-wind',
     color: '#06b6d4', // cyan-500
     colorBase: 'cyan',
@@ -95,10 +95,10 @@ const lessons = [
     path: '/respiratia-in-4-timpi'
   },
   {
-    title: 'Dialoguri de Schimbare',
-    description: 'Învață să-ți provoci gândurile catastrofice prin metoda socratică și dovezi factuale.',
-    icon: 'i-lucide-message-square-quote', // Un icon care sugerează dialog și analiză
-    color: '#3b82f6', // blue-500: Albastrul inspiră încredere, calm și logică (ideal pentru CBT)
+    title: 'Dialogues of Change',
+    description: 'Learn to challenge your catastrophic thoughts through the Socratic method and factual evidence.',
+    icon: 'i-lucide-message-square-quote', // An icon that suggests dialogue and analysis
+    color: '#3b82f6', // blue-500: Blue inspires confidence, calm, and logic (ideal for CBT)
     colorBase: 'blue',
     buttonColor: 'blue',
     path: '/dialoguri-de-schimbare'

@@ -7,27 +7,27 @@ useHead({
     { rel: 'icon', href: '/favicon.ico' }
   ],
   htmlAttrs: {
-    lang: 'ro'
+    lang: 'en'
   }
 })
 
 useSeoMeta({
-  title: 'CalmApp - Asistență Atac de Panică',
-  description: 'O aplicație pentru intervenție și prevenție în atacurile de panică.'
+  title: 'CalmApp - Panic Attack Assistance',
+  description: 'An application for panic attack intervention and prevention.'
 })
 </script>
 
 <template>
   <UApp>
     <UMain class="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col transition-colors duration-300">
-      <!-- Container central care găzduiește rutele aplicației -->
+      <!-- Central container hosting the application routes -->
       <NuxtPage />
     </UMain>
   </UApp>
 </template>
 
 <style>
-/* Fonturi mai blânde și tranziții globale */
+/* Softer fonts and global transitions */
 body {
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -1,19 +1,19 @@
 <template>
   <div class="flex-1 flex flex-col items-center justify-center p-6 bg-slate-50 dark:bg-slate-950">
     <div class="max-w-md w-full space-y-12">
-      <!-- Header minimalist -->
+      <!-- Minimalist header -->
       <div class="text-center">
         <h2 class="text-2xl font-medium text-slate-800 dark:text-slate-100 mb-2">
-          Respiră odată cu cercul
+          Breathe with the circle
         </h2>
         <p class="text-slate-500">
-          Ești în siguranță. Totul va fi bine.
+          You are safe. Everything will be fine.
         </p>
       </div>
 
-      <!-- Pasul 1: Ancorarea fizică (Cercul de respirație) -->
+      <!-- Step 1: Physical grounding (Breathing circle) -->
       <div class="flex justify-center py-10 relative h-64 w-full">
-        <!-- Text ajutător central -->
+        <!-- Central helper text -->
         <div class="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none">
           <span class="text-5xl font-bold text-sky-800 dark:text-sky-100 tabular-nums drop-shadow-sm mb-1">
             {{ timeLeft }}
@@ -23,7 +23,7 @@
           </span>
         </div>
 
-        <!-- Cercul animat exterior -->
+        <!-- Outer animated circle -->
         <div
           class="absolute top-1/2 left-1/2 w-48 h-48 rounded-full bg-sky-200 dark:bg-sky-800 opacity-50 mix-blend-multiply dark:mix-blend-screen filter blur-xl transition-transform ease-linear"
           :style="{
@@ -31,7 +31,7 @@
             transitionDuration: `${currentPhase.duration}s`
           }"
         />
-        <!-- Cercul animat interior -->
+        <!-- Inner animated circle -->
         <div
           class="absolute top-1/2 left-1/2 w-48 h-48 rounded-full bg-sky-300 dark:bg-sky-700 opacity-60 transition-transform ease-linear"
           :style="{
@@ -41,10 +41,10 @@
         />
       </div>
 
-      <!-- Pasul 2: Restructurare cognitivă -->
+      <!-- Step 2: Cognitive restructuring -->
       <div class="space-y-4">
         <h3 class="text-center text-lg font-medium text-slate-700 dark:text-slate-300">
-          Ce simți acum? (Alege o opțiune)
+          What do you feel right now? (Choose an option)
         </h3>
 
         <div class="grid grid-cols-1 gap-3">
@@ -63,7 +63,7 @@
               {{ symptom.label }}
             </UButton>
 
-            <!-- Mesajul de validare mutat aici -->
+            <!-- Validation message moved here -->
             <transition
               enter-active-class="transition-all duration-500 ease-out overflow-hidden"
               enter-from-class="opacity-0 max-h-0"
@@ -84,7 +84,7 @@
         </div>
       </div>
 
-      <!-- Acțiune finală -->
+      <!-- Final action -->
       <div class="pt-8 flex justify-center">
         <UButton
           to="/progres"
@@ -93,7 +93,7 @@
           icon="i-lucide-check-circle"
           class="w-full justify-center py-4 text-lg font-medium rounded-xl shadow-md hover:shadow-lg transition-all"
         >
-          Sunt mai bine
+          I am better
         </UButton>
       </div>
     </div>
@@ -103,15 +103,15 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
-// Stocăm timpul la care s-a intrat pe pagină și o stare globală pentru progres
+// Store the time the page was entered and a global state for progress
 const sessionDuration = useState<string>('sessionDuration', () => '~4 min')
 let startTime = 0
 
-// Respirație: Inspiră (4s), Menține (2s), Expiră (6s)
+// Breathing: Inhale (4s), Hold (2s), Exhale (6s)
 const phases = [
-  { text: 'Inspiră', duration: 4, outerScale: 1.5, innerScale: 1.2 },
-  { text: 'Menține', duration: 2, outerScale: 1.5, innerScale: 1.2 },
-  { text: 'Expiră', duration: 6, outerScale: 0.6, innerScale: 0.5 }
+  { text: 'Inhale', duration: 4, outerScale: 1.5, innerScale: 1.2 },
+  { text: 'Hold', duration: 2, outerScale: 1.5, innerScale: 1.2 },
+  { text: 'Exhale', duration: 6, outerScale: 0.6, innerScale: 0.5 }
 ]
 
 const currentPhaseIndex = ref(0)
@@ -124,7 +124,7 @@ let breathInterval: ReturnType<typeof setInterval> | null = null
 onMounted(() => {
   startTime = Date.now()
 
-  // Permitem DOM-ului să randeze inițial cercurile la scara minimă (scale mic)
+  // Allow the DOM to initially render the circles at minimum scale (small scale)
   setTimeout(() => {
     isAnimating.value = true
   }, 50)
@@ -151,54 +151,54 @@ onUnmounted(() => {
   if (breathInterval) clearInterval(breathInterval)
 })
 
-// Simptome și mesaje de reasigurare
+// Symptoms and reassurance messages
 const symptoms = [
   {
     id: 'heart',
-    label: 'Inima îmi bate foarte tare',
-    message: 'Este un răspuns normal la adrenalină. Inima ta pompează mai eficient pentru a oxigenarea mușchii. Este un semn de forță și sănătate, nu de pericol.'
+    label: 'My heart is beating very fast',
+    message: 'This is a normal response to adrenaline. Your heart pumps more efficiently to oxygenate the muscles. It is a sign of strength and health, not danger.'
   },
   {
     id: 'air',
-    label: 'Simt că nu am aer',
-    message: 'Simți asta pentru că pieptul e încordat și oxigenul e deja la nivel maxim în sânge. Concentrează-te doar pe a lăsa aerul să iasă încet, ca printr-un pai.'
+    label: 'I feel like I have no air',
+    message: 'You feel this because your chest is tight and the oxygen is already at maximum level in your blood. Just focus on letting the air out slowly, like through a straw.'
   },
   {
     id: 'dizzy',
-    label: 'Sunt amețit/ă',
-    message: 'Amețeala este cauzată de o ușoară schimbare a nivelului de dioxid de carbon din cauza respirației rapide. Este inofensivă și trece imediat ce ritmul respirator se stabilizează.'
+    label: 'I am dizzy',
+    message: 'Dizziness is caused by a slight change in carbon dioxide levels due to rapid breathing. It is harmless and passes as soon as the breathing rhythm stabilizes.'
   },
   {
     id: 'faint',
-    label: 'Simt că voi leșina',
-    message: 'Leșinul apare la scăderea tensiunii. În panică, tensiunea crește ușor, făcând leșinul imposibil din punct de vedere biologic. Rămâi pe picioarele tale, ești în siguranță.'
+    label: 'I feel like I will faint',
+    message: 'Fainting occurs when blood pressure drops. In panic, blood pressure increases slightly, making fainting biologically impossible. Stay on your feet, you are safe.'
   },
   {
     id: 'stroke',
-    label: 'Voi face un accident vascular',
-    message: 'Presiunea pe care o simți în cap este cauzată de tensiunea musculară de la nivelul gâtului și scalpului. Creierul tău este perfect protejat și oxigenat.'
+    label: 'I will have a stroke',
+    message: 'The pressure you feel in your head is caused by muscle tension in your neck and scalp. Your brain is perfectly protected and oxygenated.'
   },
   {
     id: 'fall',
-    label: 'Voi cădea / Picioare de vată',
-    message: 'Picioarele se simt moi din cauza vasodilatației: vasele de sânge se dilată pentru a hrăni mușchii cu energie. Deși se simt ciudat, mușchii tăi sunt de fapt mai puternici acum.'
+    label: 'I will fall / Jelly legs',
+    message: 'Your legs feel weak due to vasodilation: blood vessels dilate to feed the muscles with energy. Although they feel weird, your muscles are actually stronger now.'
   },
   {
     id: 'mad',
-    label: 'Simt că înnebunesc',
-    message: 'Aceasta este doar o stare de „supra-veghe”. Creierul tău scanează mediul atât de intens încât totul pare ireal. Este o funcție de protecție, nu o pierdere a rațiunii.'
+    label: 'I feel like I am going crazy',
+    message: 'This is just a state of "hyper-arousal". Your brain is scanning the environment so intensely that everything seems unreal. It is a protective function, not a loss of sanity.'
   },
   {
     id: 'choke',
-    label: 'Nod în gât / Sufocare',
-    message: 'Mușchii gâtului sunt pur și simplu contractați de stres. Căile respiratorii sunt complet libere. Încearcă să înghiți puțină apă sau doar să expiri lung.'
+    label: 'Lump in throat / Choking',
+    message: 'Your throat muscles are simply contracted by stress. Your airways are completely clear. Try to swallow a little water or just exhale long.'
   }
 ]
 
 const activeSymptomId = ref<string | null>(null)
 
 const selectSymptom = (symptom: typeof symptoms[0]) => {
-  // Închide mesajul dacă se apasă pe același buton, altfel îl deschide pe cel nou
+  // Close the message if the same button is pressed, otherwise open the new one
   activeSymptomId.value = activeSymptomId.value === symptom.id ? null : symptom.id
 }
 </script>

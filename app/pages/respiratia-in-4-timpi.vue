@@ -18,25 +18,25 @@
       <!-- Info text -->
       <div class="text-center space-y-2">
         <h1 class="text-3xl font-bold text-slate-800 dark:text-slate-100">
-          Respirație în 4 Timpi
+          4-Count Breathing
         </h1>
         <p class="text-slate-500 dark:text-slate-400">
-          Urmărește cercul și respiră în ritmul lui.
+          Follow the circle and breathe in its rhythm.
         </p>
       </div>
 
-      <!-- Animația de respirație -->
+      <!-- Breathing animation -->
       <div class="relative flex items-center justify-center h-72 w-72">
-        <!-- Cercul de bază (ghidaj) -->
+        <!-- Base circle (guide) -->
         <div class="absolute w-64 h-64 rounded-full border-2 border-cyan-100 dark:border-cyan-900/30" />
 
-        <!-- Cercul animat -->
+        <!-- Animated circle -->
         <div
           class="rounded-full bg-gradient-to-br transition-all duration-[4000ms] ease-linear flex items-center justify-center relative z-10"
           :class="[currentState.color, currentState.shadow]"
           :style="circleStyle"
         >
-          <!-- Timpul și Starea -->
+          <!-- Time and State -->
           <div class="absolute flex flex-col items-center text-white drop-shadow-md">
             <span class="text-5xl font-bold mb-1 tabular-nums">{{ timeLeft }}</span>
             <span class="text-xs uppercase tracking-widest opacity-90 font-medium">{{ currentState.label }}</span>
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <!-- Indicatori de progres pentru cei 4 pași -->
+      <!-- Progress indicators for the 4 steps -->
       <div class="flex gap-4">
         <div
           v-for="(step, index) in steps"
@@ -67,7 +67,7 @@
           size="xl"
           class="w-full justify-center py-4 text-lg font-bold rounded-2xl shadow-lg transition-transform active:scale-[0.98]"
         >
-          Sunt mai liniștit(ă)
+          I am calmer
         </UButton>
       </div>
     </footer>
@@ -77,28 +77,28 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
-const duration = 4 // 4 secunde pentru fiecare pas
+const duration = 4 // 4 seconds for each step
 
 const currentStepIndex = ref(0)
 const timeLeft = ref(duration)
 const isAnimating = ref(false)
 
 const steps = [
-  { label: 'Inspiră', scale: 1.1, color: 'from-cyan-400 to-blue-500', shadow: 'shadow-[0_0_40px_rgba(6,182,212,0.4)]' },
-  { label: 'Menține', scale: 1.1, color: 'from-blue-500 to-indigo-500', shadow: 'shadow-[0_0_40px_rgba(59,130,246,0.4)]' },
-  { label: 'Expiră', scale: 0.7, color: 'from-indigo-400 to-cyan-500', shadow: 'shadow-[0_0_20px_rgba(99,102,241,0.2)]' },
-  { label: 'Menține', scale: 0.7, color: 'from-slate-400 to-slate-500', shadow: 'shadow-none' }
+  { label: 'Inhale', scale: 1.1, color: 'from-cyan-400 to-blue-500', shadow: 'shadow-[0_0_40px_rgba(6,182,212,0.4)]' },
+  { label: 'Hold', scale: 1.1, color: 'from-blue-500 to-indigo-500', shadow: 'shadow-[0_0_40px_rgba(59,130,246,0.4)]' },
+  { label: 'Exhale', scale: 0.7, color: 'from-indigo-400 to-cyan-500', shadow: 'shadow-[0_0_20px_rgba(99,102,241,0.2)]' },
+  { label: 'Hold', scale: 0.7, color: 'from-slate-400 to-slate-500', shadow: 'shadow-none' }
 ]
 
 const currentState = computed(() => steps[currentStepIndex.value]!)
 
 const circleStyle = computed(() => {
-  // Forțăm cercul să plece de la scara mică (0.7), apoi folosim scala reală a stării
+  // Force the circle to start from the small scale (0.7), then use the actual state scale
   const currentScale = isAnimating.value ? currentState.value.scale : 0.7
   return {
     width: `${currentScale * 14}rem`,
     height: `${currentScale * 14}rem`,
-    opacity: currentState.value.label === 'Menține' ? 0.85 : 1
+    opacity: currentState.value.label === 'Hold' ? 0.85 : 1
   }
 })
 
@@ -109,7 +109,7 @@ const runTimer = () => {
     if (timeLeft.value > 1) {
       timeLeft.value--
     } else {
-      // Trecem la pasul următor
+      // Move to the next step
       currentStepIndex.value = (currentStepIndex.value + 1) % steps.length
       timeLeft.value = duration
     }
@@ -117,7 +117,7 @@ const runTimer = () => {
 }
 
 onMounted(() => {
-  // Permitem DOM-ului să randeze inițial cercul mic, apoi dăm startul animației
+  // Allow the DOM to initially render the small circle, then start the animation
   setTimeout(() => {
     isAnimating.value = true
   }, 50)
